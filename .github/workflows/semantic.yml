@@ -22,5 +22,4 @@ jobs:
         env:
           GH_TOKEN: ${{ secrets.GH_TOKEN }}
       - run: echo "GH_TOKEN is set"
-      - run: echo "GH_TOKEN length: $(echo -n $GH_TOKEN | wc -c)"
-
+      - run: echo "GH_TOKEN length: $(echo -n "${{ secrets.GH_TOKEN }}" | wc -c)"
