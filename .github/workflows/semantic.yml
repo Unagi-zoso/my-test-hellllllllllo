@@ -11,6 +11,8 @@ on:
 jobs:
   semantic-release:
     runs-on: ubuntu-latest
+    env:
+      GH_TOKEN: ${{ secrets.GH_TOKEN }}
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-node@v4
@@ -18,4 +20,6 @@ jobs:
           node-version: 'lts/*'
           registry-url: 'https://npm.pkg.github.com/'
       - run: npm install
-      - run: GH_TOKEN=${{ secrets.GH_TOKEN }} npx semantic-release
+      - run: npx semantic-release
+      - run: echo "GH_TOKEN is set"
+      - run: echo "GH_TOKEN length: ${#GH_TOKEN}"
