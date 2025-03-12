@@ -9,6 +9,16 @@ on:
       - main
 
 jobs:
+  check-token:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check GH_TOKEN length
+        env:
+          GH_TOKEN: ${{ secrets.GH_TOKEN }}
+        run: |
+          LENGTH=$(echo -n "$GH_TOKEN" | wc -c)
+          echo "GH_TOKEN length: $LENGTH"
+
   semantic-release:
     runs-on: ubuntu-latest
     steps:
@@ -21,5 +31,3 @@ jobs:
       - run: npx semantic-release
         env:
           GH_TOKEN: ${{ secrets.GH_TOKEN }}
-      - run: echo "GH_TOKEN is set"
-      - run: echo "GH_TOKEN length: $(echo -n "${{ secrets.GH_TOKEN }}" | wc -c)"
